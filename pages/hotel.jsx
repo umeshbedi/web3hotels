@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SingleHotel() {
+export default function Hotel() {
   return (
     <div>SingleHotel</div>
   )

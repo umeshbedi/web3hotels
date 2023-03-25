@@ -6,7 +6,7 @@ import style from '@/styles/component.module.scss'
 import { FiUser, FiLock } from 'react-icons/fi'
 
 
-export default function AdminLogin({login}) {
+export default function AdminLogin({login, isloading}) {
     
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
@@ -47,6 +47,7 @@ export default function AdminLogin({login}) {
                         block
                         size='large'
                         htmlType='submit'
+                        loading={isloading}
                     >
                         Login
                     </Button>

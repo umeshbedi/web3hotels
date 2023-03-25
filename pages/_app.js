@@ -3,15 +3,21 @@ import Head from 'next/head'
 import { ConfigProvider, Layout } from 'antd'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import {useEffect, useState} from 'react'
 
 export default function App({ Component, pageProps }) {
+  const [path, setPath] = useState('/')
+  useEffect(()=>{
+    setPath(window.location.pathname)
+  },[])
   return (
     <>
       <ConfigProvider
         theme={{
           token: {
             colorPrimary: '#fc4131',
-            borderRadius: 0
+            borderRadius: 0,
+
           }
         }}
       >
@@ -22,7 +28,10 @@ export default function App({ Component, pageProps }) {
         <Layout>
           <Header />
           <Component {...pageProps} />
-          <Footer />
+          
+          {path!=='/admin'&&
+            <Footer />
+          }
         </Layout>
       </ConfigProvider>
     </>

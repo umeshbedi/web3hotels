@@ -1,21 +1,21 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import 'firebase/compat/firestore'
-import 'firebase/compat/storage'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAlMlJn0dSQ8kOH40aOH66CRC7E117YHb8",
-    authDomain: "web3hotels-79bee.firebaseapp.com",
-    projectId: "web3hotels-79bee",
-    storageBucket: "web3hotels-79bee.appspot.com",
-    messagingSenderId: "772090824633",
-    appId: "1:772090824633:web:8da51139318b410c8ad868"
-  };
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSANGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
+};
 
-  const firebaseApp = firebase.initializeApp(firebaseConfig)
+const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
+console.log(firebase.app.length)
+const auth = firebaseApp.auth();
+const db = firebaseApp.firestore();
+const storage = firebaseApp.storage();
 
-  const auth = firebaseApp.auth()
-  const db = firebaseApp.firestore()
-  const storage = firebaseApp.storage()
-  
-  export {auth, db, storage}
+export { auth, db, storage }

@@ -10,11 +10,11 @@ export const cityName = [
     "Diglipur"
 ]
 
-export const starHotels = [
-    "2 Star Hotels",
-    "3 Star Hotels",
-    "4 Star Hotels",
-    "5 Star Hotels"
+export const category = [
+    "Budget",
+    "Standard",
+    "Premium",
+    "Luxury"
 ]
 
 export function mobile() {

@@ -37,7 +37,7 @@ export default function Search() {
             <Col span={isMobile ? 18 : 10} style={{}}>
               <h1 style={{ fontSize: isMobile ? 35 : 45, color: 'white' }}>Hotels in {query.location}</h1>
               <br />
-              <p style={{ color: 'white' }}>Find {query.star} in {query.location} with Best Experience</p>
+              <p style={{ color: 'white' }}>Find {query.category} Hotels/Resorts in {query.location} with Best Experience</p>
             </Col>
           </Row>
 
@@ -47,8 +47,7 @@ export default function Search() {
 
         <div style={{ display: 'flex', alignItems: 'center', margin: '50px 0', flexDirection: 'column' }}>
         <SearchPage />
-          <h1 style={{ color: 'grey' }}>Hotels for {query.location} will display here...</h1>
-          <p style={{ color: 'grey' }}>{query.star} </p>
+          
         </div>
 
       </div>

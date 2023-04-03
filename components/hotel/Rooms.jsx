@@ -5,8 +5,8 @@ import { Button, Select } from 'antd'
 
 export default function Rooms({category}) {
     
-    const [roomNumber, setRoomNumber] = useState(1)
-    const [adult, setAdult] = useState(1)
+    const [roomNumber, setRoomNumber] = useState(0)
+    const [adult, setAdult] = useState(0)
     const [child, setChild] = useState(0)
 
     return (
@@ -51,7 +51,7 @@ export default function Rooms({category}) {
                         text={'Room'}
                         number={roomNumber}
                         minusOnPress={() => {
-                            if (roomNumber > 1) {
+                            if (roomNumber > 0) {
                                 setRoomNumber(roomNumber - 1)
                             }
                         }}
@@ -62,7 +62,7 @@ export default function Rooms({category}) {
                         text={'Adults'}
                         number={adult}
                         minusOnPress={() => {
-                            if (adult > 1) {
+                            if (adult > 0) {
                                 setAdult(adult - 1)
                             }
                         }}

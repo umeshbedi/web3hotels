@@ -4,7 +4,7 @@ const { Text, Title, Link } = Typography
 import { db } from '../firebase'
 import Head from 'next/head'
 import style from '@/styles/component.module.scss'
-import { cityName, starHotels, mobile } from '@/components/variables'
+import { cityName, category, mobile } from '@/components/variables'
 import { SearchOutlined, StepBackwardOutlined } from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 

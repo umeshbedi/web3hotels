@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { mobile, cityName, starHotels } from './variables';
+import { mobile, cityName, category } from './variables';
 import { Select, Button, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 export default function SearchDiv() {
 
     const [cityDropDown, setCityDropDown] = useState([])
-    const [starHotel, setStarHotel] = useState([])
+    const [categories, setCategories] = useState([])
     const [isMobile, setIsMobile] = useState(false)
     const [location, setLocation] = useState('')
     const [star, setStar] = useState('')
@@ -23,20 +23,20 @@ export default function SearchDiv() {
 
     useEffect(() => {
         var cityTemp = []
-        var starHotelTemp = []
+        var categoryTemp = []
         cityName.map((city) => {
             cityTemp.push({
                 value: city.split(" ").join(""),
                 label: city
             })
         })
-        starHotels.map((hotel) => {
-            starHotelTemp.push({
+        category.map((hotel) => {
+            categoryTemp.push({
                 value: hotel.split(" ").join(""),
                 label: hotel
             })
         })
-        setStarHotel(starHotelTemp)
+        setCategories(categoryTemp)
         setCityDropDown(cityTemp)
 
     }, [])
@@ -45,7 +45,7 @@ export default function SearchDiv() {
         if (location==''||star=='') {
             messageApi.error("Please Select Location and Star Hotels")
         }else{
-            router.push('/search?location='+location+'&star='+star)
+            router.push('/search?location='+location+'&category='+star)
         }
     }
 
@@ -53,7 +53,7 @@ export default function SearchDiv() {
         <>
         {contextHolder}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                {cityDropDown.length != 0 && starHotel.length != 0 &&
+                {cityDropDown.length != 0 && categories.length != 0 &&
                     <div style={{
                         width: isMobile ? '80%' : '70%',
                         backgroundColor: 'white',
@@ -83,11 +83,11 @@ export default function SearchDiv() {
                         />
                         <Select
                             size='large'
-                            options={starHotel}
+                            options={categories}
                             style={{ width: '100%' }}
-                            placeholder={starHotel[0].label}
+                            placeholder={categories[0].label}
                             onSelect={(e) => {
-                                const re = starHotel.find((f) => f.value == e)
+                                const re = categories.find((f) => f.value == e)
                                 setStar(re.label)
                             }}
                         />

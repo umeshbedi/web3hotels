@@ -18,17 +18,17 @@ export default function Footer() {
         <div>
           <h2>Support</h2>
           <Divider style={{ margin: "15% 0%", backgroundColor: style.primaryColor, height: 2 }} />
-          <div style={{ marginBottom: 5 }}><Link href={"/terms-and-condition"}> Terms & Condition</Link></div>
-          <div style={{ marginBottom: 5 }}><Link href={"/disclaimer"}> Disclaimer</Link></div>
-          <div style={{ marginBottom: 5 }}><Link href={"/privacy-policy"}> Privacy Policy</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/page/terms-and-condition"}> Terms & Condition</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/page/disclaimer"}> Disclaimer</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/page/privacy-policy"}> Privacy Policy</Link></div>
 
         </div>
         <div>
           <h2>Useful Links</h2>
           <Divider style={{ margin: "15% 0%", backgroundColor: style.primaryColor, height: 2 }} />
-          <div style={{ marginBottom: 5 }}><Link href={"/terms-and-condition"}> About Us</Link></div>
-          <div style={{ marginBottom: 5 }}><Link href={"/disclaimer"}> Activity</Link></div>
-          <div style={{ marginBottom: 5 }}><Link href={"/privacy-policy"}> Contact Us</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/page/about-us"}> About Us</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/activity"}> Activity</Link></div>
+          <div style={{ marginBottom: 5 }}><Link href={"/contact-us"}> Contact Us</Link></div>
         </div>
         <div>
           <h2>Follow Us</h2>

@@ -42,11 +42,17 @@ export default function MenuAdmin({menuClick}) {
         <PlusOutlined/> Add Cruises
         </Menu.Item>
         <Menu.SubMenu title={<p><FaNewspaper/> Pages</p>}>
-          <Menu.Item key={'term&cond'} onClick={(e)=>menuClick(e.key)}>
+          <Menu.Item key={'about-us'} onClick={(e)=>menuClick(e.key)}>
+           <p>About Us</p>
+          </Menu.Item>
+          <Menu.Item key={'terms-and-condition'} onClick={(e)=>menuClick(e.key)}>
            <p>Terms & Cond.</p>
           </Menu.Item>
-          <Menu.Item key={'privacyPolicy'} onClick={(e)=>menuClick(e.key)}>
+          <Menu.Item key={'privacy-policy'} onClick={(e)=>menuClick(e.key)}>
            <p>Privacy Policy</p>
+          </Menu.Item>
+          <Menu.Item key={'disclaimer'} onClick={(e)=>menuClick(e.key)}>
+           <p>Disclaimer</p>
           </Menu.Item>
         </Menu.SubMenu>
         

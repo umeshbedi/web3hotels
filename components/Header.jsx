@@ -41,7 +41,7 @@ export default function Header() {
           <Link href={'/'}>Home</Link>
         </Menu.Item>
         <Menu.Item key={'about'}>
-          <Link href={'/about-us'}>About Us</Link>
+          <Link href={'/page/about-us'}>About Us</Link>
         </Menu.Item>
 
         <Menu.SubMenu title={<p style={{ fontSize: 14 }}>Hotels/Resorts{isMobile ? null : <FaAngleDown />}</p>}>

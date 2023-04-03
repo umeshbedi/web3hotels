@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminLogin from '../components/AdminLogin'
-import { message, Layout, theme } from 'antd';
+import { message, Layout, theme, Skeleton } from 'antd';
 const { Header, Sider, Content } = Layout
 import { UserOutlined } from '@ant-design/icons'
 import { auth, db } from '@/firebase';
@@ -10,7 +10,11 @@ import dynamic from 'next/dynamic';
 import MenuAdmin from '@/components/admin/MenuAdmin';
 import Hompage from '@/components/admin/Hompage';
 // import PageUpdate from '@/components/admin/PageUpdate';
-const PageUpdate = dynamic(()=>import('../components/admin/PageUpdate'),{ssr:false})
+const PageUpdate = dynamic(()=>import('../components/admin/PageUpdate'),
+{
+  ssr:false,
+  loading:()=><Skeleton/>
+})
 
 
 export default function Dashboard() {
@@ -37,7 +41,7 @@ export default function Dashboard() {
 
   function onClick(e){
     if (e=='term&cond') {
-      setContent(<PageUpdate pageName={"Terms and Condition"}/>)
+      
     }
   }
 
@@ -108,7 +112,9 @@ export default function Dashboard() {
             <p>{user.email}</p>
           </div>
           <MenuAdmin 
-          menuClick={(e)=>onClick(e)}
+          menuClick={(e)=>{
+            setContent(<PageUpdate pageName={e}/>)
+          }}
           />
         </Sider>
         <Layout>

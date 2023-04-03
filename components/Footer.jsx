@@ -11,7 +11,9 @@ export default function Footer() {
           <Link href={'/'}>
             <img src="/images/WEB3 Logo Final_h80.png" alt="web3hotel logo" height={60} />
           </Link>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+          <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500.
+          </p>
         </div>
         <div>
           <h2>Support</h2>
@@ -34,7 +36,7 @@ export default function Footer() {
         </div>
       </div>
       <div>
-        <p style={{textAlign:'center', padding:'2% 0%', backgroundColor:'#e1e1e1', color:'grey'}}>© 2023 <Link href={'/'}> Web3hotels.com </Link> - All rights reserved</p>
+        <p style={{ textAlign: 'center', padding: '2% 0%', backgroundColor: '#e1e1e1', color: 'grey' }}>© 2023 <Link href={'/'}> Web3hotels.com </Link> - All rights reserved</p>
       </div>
     </div>
   )

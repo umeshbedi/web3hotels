@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { HomeOutlined, PlusOutlined } from '@ant-design/icons';
+import {FaNewspaper} from 'react-icons/fa'
 import { Menu } from 'antd';
 
 import { mobile } from '../variables';
 
-export default function MenuAdmin() {
+export default function MenuAdmin({menuClick}) {
     
     const [isMobile, setIsMobile] = useState(false)
     const [active, setActive] = useState('home')
@@ -22,9 +23,11 @@ export default function MenuAdmin() {
           fontWeight: 'bold',
           height: '100%',
           borderRight: 0,
+          // backgroundColor:'green'
         }}
         disabledOverflow
-        onClick={(e) => setActive(e.key)}
+        onClick={(e) => console.log(e)}
+        
         activeKey={active}
         theme={'dark'}
       >
@@ -38,6 +41,15 @@ export default function MenuAdmin() {
         <Menu.Item key={'addCruises'}>
         <PlusOutlined/> Add Cruises
         </Menu.Item>
+        <Menu.SubMenu title={<p><FaNewspaper/> Pages</p>}>
+          <Menu.Item key={'term&cond'} onClick={(e)=>menuClick(e.key)}>
+           <p>Terms & Cond.</p>
+          </Menu.Item>
+          <Menu.Item key={'privacyPolicy'} onClick={(e)=>menuClick(e.key)}>
+           <p>Privacy Policy</p>
+          </Menu.Item>
+        </Menu.SubMenu>
+        
         
       </Menu>
     </div>

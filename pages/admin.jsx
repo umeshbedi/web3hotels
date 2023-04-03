@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react'
 import AdminLogin from '../components/AdminLogin'
 import { message, Layout, theme } from 'antd';
 const { Header, Sider, Content } = Layout
-
+import { UserOutlined } from '@ant-design/icons'
 import { auth, db } from '@/firebase';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+
 import MenuAdmin from '@/components/admin/MenuAdmin';
+import Hompage from '@/components/admin/Hompage';
+// import PageUpdate from '@/components/admin/PageUpdate';
+const PageUpdate = dynamic(()=>import('../components/admin/PageUpdate'),{ssr:false})
+
 
 export default function Dashboard() {
 
@@ -13,19 +19,27 @@ export default function Dashboard() {
 
   const [isLogin, setIsLogin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-
-  const {token: { colorBgContainer }} = theme.useToken();
+  const [collapsed, setCollapsed] = useState(false);
+  const [user, setUser] = useState([])
+  const [content, setContent] = useState(<Hompage/>)
+  const { token: { colorBgContainer } } = theme.useToken();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.uid);
+        setUser(user.providerData[0])
         setIsLogin(true);
       } else {
         console.log("User Not found");
       }
     })
   }, [])
+
+  function onClick(e){
+    if (e=='term&cond') {
+      setContent(<PageUpdate pageName={"Terms and Condition"}/>)
+    }
+  }
 
   function Login(email, password) {
     setIsLoading(true)
@@ -60,35 +74,50 @@ export default function Dashboard() {
       <Head>
         <title>Admin Panel</title>
       </Head>
-      
-      <Layout>
-        <Header>
 
-        </Header>
-        
-        <Layout>
-          <Sider 
-          width={200} 
-          style={{
-            background: colorBgContainer,
-          }}
+      <Layout
+        style={{ minHeight: '100vh' }}
+      >
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(e) => setCollapsed(e)}
+          style={{backgroundColor:'rgb(27, 27, 27)'}}
+          collapsedWidth={30}
+          
+        >
+          <div
+            style={{
+              // background: 'rgba(255, 255, 255, 0.2)',
+              color: 'rgba(256,256,256, .7)',
+              padding: '15px 15px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '10px'
+            }}
           >
-            <MenuAdmin />
-          </Sider>
-        
+            <UserOutlined
+              style={{
+                fontSize: 50,
+                border: '2px solid',
+                padding: 5,
+                borderRadius: 50
+              }}
+            />
+            <p>{user.email}</p>
+          </div>
+          <MenuAdmin 
+          menuClick={(e)=>onClick(e)}
+          />
+        </Sider>
         <Layout>
-          <Content
-           style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-          >
-            Content
-          </Content>
+          <Header style={{ paddingLeft: 20, background: 'rgba(0,0,0,.05)', }}>
+          </Header>
+          
+          {content}
         </Layout>
-        </Layout>
+
       </Layout>
     </main>
   )

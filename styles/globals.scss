@@ -14,6 +14,7 @@
   padding: 0;
   margin: 0;
   font-family: Roboto;
+  
 }
 
 
@@ -26,7 +27,11 @@ body {
   a {
     color: inherit;
     text-decoration: none;
-  }
+    
+   }
+   a:hover{
+    color: #fc4131;
+   }
 
   p{
     font-size: 16px;
@@ -35,11 +40,12 @@ body {
 }
 
 .footerdiv{
-  height: 300px;
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(234, 234, 234);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 2% 5%;
+  color: grey;
+  gap: 5%;
 }
 
 .pageHeader{
@@ -58,4 +64,16 @@ body {
   padding-left: 5%;
   background-size: cover;
   background-position-y: bottom;
+}
+.ant-checkbox-wrapper+.ant-checkbox-wrapper{
+  margin-inline-start: 0;
+}
+
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg{
+  height: 50px!important;
+  width: 70%!important;
+}
+
+.ant-layout .ant-layout-sider-trigger{
+  background: rgb(63, 63, 63);
 }

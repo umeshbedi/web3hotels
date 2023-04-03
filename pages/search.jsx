@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { mobile } from '@/components/variables'
 import { Row, Col } from 'antd'
 import SearchDiv from '@/components/SearchDiv'
+import SearchPage from '@/components/SearchPage'
 
 export default function Search() {
 
@@ -42,10 +43,12 @@ export default function Search() {
 
         </div>
         <SearchDiv />
+        
 
         <div style={{ display: 'flex', alignItems: 'center', margin: '50px 0', flexDirection: 'column' }}>
-          <h1 style={{color:'grey'}}>Hotels for {query.location} will display here...</h1>
-          <p style={{color:'grey'}}>{query.star} </p>
+        <SearchPage />
+          <h1 style={{ color: 'grey' }}>Hotels for {query.location} will display here...</h1>
+          <p style={{ color: 'grey' }}>{query.star} </p>
         </div>
 
       </div>

@@ -1,15 +1,25 @@
 import '@/styles/globals.scss'
+import "react-image-gallery/styles/scss/image-gallery.scss";
 import Head from 'next/head'
 import { ConfigProvider, Layout } from 'antd'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import {useEffect, useState} from 'react'
+
+import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import SHeader from '@/components/skeleton/SHeader'
+
+const Header = dynamic(() => import('../components/Header'), {
+  ssr: false,
+  loading: () => <SHeader />
+});
+const Footer = dynamic(() => import('../components/Footer'), {ssr:false, loading:()=><></>});
+
+
 
 export default function App({ Component, pageProps }) {
   const [path, setPath] = useState('/')
-  useEffect(()=>{
+  useEffect(() => {
     setPath(window.location.pathname)
-  },[])
+  }, [])
   return (
     <>
       <ConfigProvider
@@ -27,9 +37,10 @@ export default function App({ Component, pageProps }) {
         </Head>
         <Layout>
           <Header />
+
           <Component {...pageProps} />
-          
-          {path!=='/admin'&&
+
+          {path !== '/admin' &&
             <Footer />
           }
         </Layout>

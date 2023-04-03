@@ -44,13 +44,27 @@ export default function Header() {
           <Link href={'/about-us'}>About Us</Link>
         </Menu.Item>
 
-        <Menu.SubMenu title={<p style={{ fontSize: 14 }}>Star Hotels {isMobile ? null : <FaAngleDown />}</p>}>
-          <Menu.SubMenu title={starHotels[0]}>
+        <Menu.SubMenu title={<p style={{ fontSize: 14 }}>Hotels/Resorts{isMobile ? null : <FaAngleDown />}</p>}>
+        
+        <Menu.Item key={'Budget'}>
+          <Link href={'#'}>Budget</Link>
+        </Menu.Item>
+        <Menu.Item key={'Standard'}>
+          <Link href={'#'}>Standard</Link>
+        </Menu.Item>
+        <Menu.Item key={'Premium'}>
+          <Link href={'#'}>Premium</Link>
+        </Menu.Item>
+        <Menu.Item key={'Luxury'}>
+          <Link href={'#'}>Luxury</Link>
+        </Menu.Item>
+
+          {/* <Menu.SubMenu title={starHotels[0]}>
             {cityName.map((item) => {
               const key = "2star-" + item.split(" ").join("-")
               return (
                 <Menu.Item key={key}>
-                  <Link href={'/search?location='+item+'&star='+starHotels[0]}>{item}</Link>
+                  <Link href={'/search?location=' + item + '&star=' + starHotels[0]}>{item}</Link>
                 </Menu.Item>
               )
             })}
@@ -60,7 +74,7 @@ export default function Header() {
               const key = "3star-" + item.split(" ").join("-")
               return (
                 <Menu.Item key={key}>
-                  <Link href={'/search?location='+item+'&star='+starHotels[1]}>{item}</Link>
+                  <Link href={'/search?location=' + item + '&star=' + starHotels[1]}>{item}</Link>
                 </Menu.Item>
               )
             })}
@@ -70,7 +84,7 @@ export default function Header() {
               const key = "4star-" + item.split(" ").join("-")
               return (
                 <Menu.Item key={key}>
-                  <Link href={'/search?location='+item+'&star='+starHotels[2]}>{item}</Link>
+                  <Link href={'/search?location=' + item + '&star=' + starHotels[2]}>{item}</Link>
                 </Menu.Item>
               )
             })}
@@ -80,19 +94,27 @@ export default function Header() {
               const key = "5star-" + item.split(" ").join("-")
               return (
                 <Menu.Item key={key}>
-                  <Link href={'/search?location='+item+'&star='+starHotels[3]}>{item}</Link>
+                  <Link href={'/search?location=' + item + '&star=' + starHotels[3]}>{item}</Link>
                 </Menu.Item>
               )
             })}
-          </Menu.SubMenu>
-        </Menu.SubMenu>
+          </Menu.SubMenu>*/}
+        </Menu.SubMenu> 
 
         <Menu.Item key={'activity'}>
           <Link href={'/activity'}>Activity</Link>
         </Menu.Item>
-        <Menu.Item key={'cruises'}>
-          <Link href={'/cruises'}>Cruises</Link>
-        </Menu.Item>
+        <Menu.SubMenu title={<p style={{ fontSize: 14 }}>Cruises {isMobile ? null : <FaAngleDown />}</p>}>
+          <Menu.Item key={'nautika'}>
+            <Link href={'/cruises?name=nautika'}>Nautika</Link>
+          </Menu.Item>
+          <Menu.Item key={'Makruzz'}>
+            <Link href={'/cruises?name=makruzz'}>Makruzz</Link>
+          </Menu.Item>
+          <Menu.Item key={'GreenOcean'}>
+            <Link href={'/cruises?name=green ocean'}>Green Ocean</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
         <Menu.Item key={'contact'}>
           <Link href={'/contact-us'}>Contact Us</Link>
         </Menu.Item>
@@ -118,7 +140,7 @@ export default function Header() {
           {isMobile ?
             (
               <p
-                style={{ float: 'right', fontSize:35, color:style.primaryColor }}
+                style={{ float: 'right', fontSize: 35, color: style.primaryColor }}
                 onClick={() => setOpen(true)}
               >
                 <IoIosMenu />

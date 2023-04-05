@@ -74,10 +74,13 @@ export function ImageFooter({ text, onPress }) {
 
 const boxShadow = '0 0 30px 0 rgba(0, 0, 0, 0.1)'
 
-export function MinusPlus({text, number, pluOnPress, minusOnPress}) {
+export function MinusPlus({text, number, pluOnPress, minusOnPress, subText}) {
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div>
             <p>{text}</p>
+            <p style={{fontSize:14}}>{subText}</p>
+            </div>
             <div
                 style={{
                     marginLeft: 10,

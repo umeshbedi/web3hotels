@@ -6,6 +6,7 @@ export default function HotelMenu() {
     return (
         <Menu
             mode='horizontal'
+            style={{position:'sticky', top:'9%', zIndex:5, fontSize:17}}
 
         >
             <Menu.Item key={'rooms'}>

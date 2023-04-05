@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import AdminLogin from '../components/AdminLogin'
-import { message, Layout, theme, Skeleton } from 'antd';
-const { Header, Sider, Content } = Layout
-import { UserOutlined } from '@ant-design/icons'
+import { message, Layout, Skeleton, Dropdown } from 'antd';
+const { Header, Sider } = Layout
+import { UserOutlined, LogoutOutlined, MailOutlined } from '@ant-design/icons'
 import { auth, db } from '@/firebase';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
 import MenuAdmin from '@/components/admin/MenuAdmin';
-import Hompage from '@/components/admin/Hompage';
-// import PageUpdate from '@/components/admin/PageUpdate';
-const PageUpdate = dynamic(()=>import('../components/admin/PageUpdate'),
-{
-  ssr:false,
-  loading:()=><Skeleton/>
-})
+
+const PageUpdate = dynamic(() => import('../components/admin/PageUpdate'), { ssr: false, loading: () => <Skeleton /> })
+const Dashboard = dynamic(() => import('../components/admin/Dashboard'), { ssr: false, loading: () => <Skeleton /> })
+const Hompage = dynamic(() => import('../components/admin/Hompage'), { ssr: false, loading: () => <Skeleton /> })
+const AdminLogin = dynamic(() => import('../components/admin/AdminLogin'), { ssr: false, loading: () => <Skeleton /> })
+const AddHotel = dynamic(() => import('../components/admin/AddHotel'), { ssr: false, loading: () => <Skeleton /> })
+const HotelList = dynamic(() => import('../components/admin/HotelList'), { ssr: false, loading: () => <Skeleton /> })
 
 
-export default function Dashboard() {
+export default function Admin() {
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -25,8 +24,8 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false)
   const [collapsed, setCollapsed] = useState(false);
   const [user, setUser] = useState([])
-  const [content, setContent] = useState(<Hompage/>)
-  const { token: { colorBgContainer } } = theme.useToken();
+  const [content, setContent] = useState(< Dashboard />)
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -39,9 +38,46 @@ export default function Dashboard() {
     })
   }, [])
 
-  function onClick(e){
-    if (e=='term&cond') {
-      
+  const items = [
+    {
+      label: user.email,
+      key: 'email',
+      icon: <MailOutlined />,
+    },
+    {
+      label: 'Logout',
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      onClick: (e) => {
+        auth.signOut()
+          .then(() => {
+            setIsLogin(false);
+          });
+      }
+    },
+  ]
+
+  function onMenuClick(e) {
+    if (e == 'homepage') {
+      setContent(<Hompage />)
+    }
+    else if(e == 'dashboard'){
+      setContent(<Dashboard />)
+    }
+    else if(e == 'addhotel'){
+      setContent(<AddHotel />)
+    }
+    else if(e == 'hotellist'){
+      setContent(<HotelList />)
+    }
+    else if(e == 'addcruises'){
+      alert(e)
+    }
+    else if(e == 'cruiseslist'){
+      alert(e)
+    }
+    else{
+      setContent(<PageUpdate pageName={e} />)
     }
   }
 
@@ -86,42 +122,34 @@ export default function Dashboard() {
           collapsible
           collapsed={collapsed}
           onCollapse={(e) => setCollapsed(e)}
-          style={{backgroundColor:'rgb(27, 27, 27)'}}
+          style={{ backgroundColor: 'rgb(27, 27, 27)' }}
           collapsedWidth={30}
+          width={'inherit'}
           
         >
-          <div
-            style={{
-              // background: 'rgba(255, 255, 255, 0.2)',
-              color: 'rgba(256,256,256, .7)',
-              padding: '15px 15px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px'
-            }}
-          >
-            <UserOutlined
-              style={{
-                fontSize: 50,
-                border: '2px solid',
-                padding: 5,
-                borderRadius: 50
-              }}
-            />
-            <p>{user.email}</p>
-          </div>
-          <MenuAdmin 
-          menuClick={(e)=>{
-            setContent(<PageUpdate pageName={e}/>)
-          }}
+
+          <MenuAdmin
+            menuClick={(e) => onMenuClick(e)}
           />
         </Sider>
         <Layout>
-          <Header style={{ paddingLeft: 20, background: 'rgba(0,0,0,.05)', }}>
+          <Header style={{ background: 'inherit', display: 'flex', justifyContent: 'flex-end' }}>
+            <div>
+              <Dropdown.Button
+                menu={{ items }}
+                icon={<UserOutlined />}
+                placement='bottomRight'
+                size='large'
+
+              >
+                Admin
+              </Dropdown.Button>
+            </div>
+
           </Header>
-          
-          {content}
+          <div style={{ padding: '0% 2%' }}>
+            {content}
+          </div>
         </Layout>
 
       </Layout>

@@ -29,7 +29,7 @@ export default function PageUpdate({pageName}) {
     },[pageName])
 
     return (
-    <div style={{padding:'2%'}}>
+    <div>
         {contextHolder}
 
         <h1 style={{fontSize:'200%', marginBottom:20}}>{pageName}</h1>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { db } from '../firebase'
+import { db } from '../../firebase'
 import { Button, Input, Space, message, Form } from 'antd'
 import style from '@/styles/component.module.scss'
 

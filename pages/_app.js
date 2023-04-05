@@ -36,7 +36,9 @@ export default function App({ Component, pageProps }) {
           <link rel="icon" href="/images/WEB3 Icon.ico" />
         </Head>
         <Layout>
+          <div style={{position:'sticky', top:0, zIndex:5}}>
           <Header />
+          </div>
 
           <Component {...pageProps} />
 

@@ -29,7 +29,8 @@ export default function Header() {
           fontWeight: 'bold',
           float: 'right',
           width: isMobile ? '100%' : 'auto',
-          border: 'none'
+          border: 'none',
+          
         }}
         disabledOverflow
         onClick={(e) => setActive(e.key)}

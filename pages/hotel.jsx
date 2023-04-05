@@ -74,10 +74,7 @@ export default function Hotel() {
 
             {/* Right side container */}
             <div style={{ width: '25%', paddingLeft: '1%' }}>
-              {/* <div style={{position:'fixed', backgroundColor:'red', width:'calc(21.6%)', marginTop: fixed?'-5%':'0%'}}>
-                <Cart />
-              </div> */}
-              <div style={{position:'sticky', top:'13%'}}>
+              <div style={{position:'sticky', top:'13%', transition:"top .5s"}}>
                 <Cart />
               </div>
             </div>

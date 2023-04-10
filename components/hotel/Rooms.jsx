@@ -6,10 +6,10 @@ import style from '@/styles/component.module.scss'
 import {CheckOutlined, RightOutlined} from '@ant-design/icons'
 export default function Rooms({category}) {
     
-    const [roomNumber, setRoomNumber] = useState(0)
-    const [adult, setAdult] = useState(0)
+    const [roomNumber, setRoomNumber] = useState(1)
+    const [adult, setAdult] = useState(1)
     const [child, setChild] = useState(0)
-
+    const [child6, setChild6] = useState(0)
     return (
         <div>
             <div style={{ display: 'flex', gap: '5%' }}>
@@ -83,13 +83,13 @@ export default function Rooms({category}) {
                     <MinusPlus
                         text={'Childs'}
                         subText={"(6-12 Y)"}
-                        number={child}
+                        number={child6}
                         minusOnPress={() => {
-                            if (child > 0) {
-                                setChild(child - 1)
+                            if (child6 > 0) {
+                                setChild6(child6 - 1)
                             }
                         }}
-                        pluOnPress={() => setChild(child + 1)}
+                        pluOnPress={() => setChild6(child6 + 1)}
                     />
                 </div>
                 

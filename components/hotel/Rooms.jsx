@@ -10,6 +10,8 @@ export default function Rooms({category}) {
     const [adult, setAdult] = useState(1)
     const [child, setChild] = useState(0)
     const [child6, setChild6] = useState(0)
+
+    //test
     return (
         <div>
             <div style={{ display: 'flex', gap: '5%' }}>

@@ -1,9 +1,13 @@
-import React, {useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import ImageGallery from 'react-image-gallery'
 import { ImageFooter, images } from '../variables'
 
 
-export default function MainImage() {
+export default function MainImage({hotelId}) {
+
+    useEffect(()=>{
+
+    },[hotelId])
 
     const allFullRef = useRef()
 

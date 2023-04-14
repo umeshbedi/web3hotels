@@ -13,16 +13,16 @@ export default function HotelMenu() {
                 <Link href={'/'}>Rooms</Link>
             </Menu.Item>
             <Menu.Item key={'amenties'}>
-                <Link href={'/about-us'}>Amenties</Link>
+                <Link href={'#'}>Amenties</Link>
             </Menu.Item>
             <Menu.Item key={'abouthotel'}>
-                <Link href={'/about-us'}>About</Link>
+                <Link href={'#'}>About</Link>
             </Menu.Item>
             <Menu.Item key={'location'}>
-                <Link href={'/about-us'}>Location</Link>
+                <Link href={'#'}>Location</Link>
             </Menu.Item>
             <Menu.Item key={'facilities'}>
-                <Link href={'/about-us'}>Facilities</Link>
+                <Link href={'#'}>Facilities</Link>
             </Menu.Item>
 
             <Menu.Item key={'policies'}>

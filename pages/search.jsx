@@ -46,7 +46,7 @@ export default function Search() {
         
 
         <div style={{ display: 'flex', alignItems: 'center', margin: '50px 0', flexDirection: 'column' }}>
-        <SearchPage />
+        <SearchPage query={query} />
           
         </div>
 

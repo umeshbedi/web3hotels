@@ -24,7 +24,7 @@ export default function Admin() {
   const [isLoading, setIsLoading] = useState(false)
   const [collapsed, setCollapsed] = useState(false);
   const [user, setUser] = useState([])
-  const [content, setContent] = useState(< Dashboard />)
+  const [content, setContent] = useState(< AddHotel />)
 
 
   useEffect(() => {

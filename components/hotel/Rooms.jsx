@@ -49,7 +49,7 @@ export default function Rooms({ roomData }) {
         }
         else if(e==3){
             console.log("third")
-            const third = adult%roomNumber
+            const third = adult-(roomNumber*2)
             console.log(third)
             setPrice(
                 (roomData.with_Breakfast_third*third)+
@@ -63,7 +63,6 @@ export default function Rooms({ roomData }) {
                 )
         }
     }
-
     function priceWithBreakFastDinner(e) {
         if(e==1){
             console.log(e)
@@ -94,7 +93,7 @@ export default function Rooms({ roomData }) {
         }
         else if(e==3){
             console.log("third")
-            const third = adult%roomNumber
+            const third = adult-(roomNumber*2)
             console.log(third)
             setPrice(
                 (roomData.with_Breakfast_and_Dinner_third*third)+
@@ -138,7 +137,7 @@ export default function Rooms({ roomData }) {
         }
         else if(e==3){
             console.log("third")
-            const third = adult%roomNumber
+            const third = adult-(roomNumber*2)
             console.log(third)
             setPrice(
                 (roomData.no_Meal_third*third)+

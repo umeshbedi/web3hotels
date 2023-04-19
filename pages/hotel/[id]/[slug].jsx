@@ -34,6 +34,11 @@ export default function Hotel() {
   const [roomData, setRoomData] = useState([])
   const [msg, shoMsg] = message.useMessage()
 
+  const [cartItem, setCartItem] = useState([])
+  const [cartElement, setCartElement] = useState(<Cart />)
+  const [selectedMenu, setSelectedMenu] = useState('rooms')
+  const [menuContent, setMenuContent] = useState("")
+
   useEffect(() => {
     // console.log(query)
     if (query.id != undefined) {
@@ -53,6 +58,72 @@ export default function Hotel() {
         })
     }
   }, [query])
+
+
+  function deleteCart(name) {
+
+  }
+
+  function RoomContent() {
+    return (
+      <div>
+        {roomData.map((room) => (
+          <>
+            <Rooms roomData={room} cart={(e) => {
+              const isRoom = cartItem.findIndex(f => f.roomName == e.roomName)
+              if (isRoom == -1) {
+                cartItem.push(e)
+                msg.success("Room Added to Cart!")
+              } else {
+                cartItem[isRoom] = e
+                msg.success("Cart is Updated!")
+              }
+              setTimeout(() => {
+                setCartElement(
+                  <Cart
+                    deleteCart={(e) => deleteCart(e)}
+                    cartData={{
+                      hotelName: hotelData.title,
+                      hotelId: query.id,
+                      hotelAddress: hotelData.address,
+                      rooms: cartItem,
+                      serviceCharge: hotelData.serviceCharge,
+                      gstCharge: hotelData.gstCharge
+                    }} />
+                )
+              }, 500)
+            }} />
+            <Divider />
+          </>
+        ))
+
+        }
+      </div>
+    )
+  }
+
+  function MenuDiv() {
+    return <div id='menuContent' />
+  }
+
+  useEffect(() => {
+    if (selectedMenu == "amenties") {
+      document.getElementById("amenties").innerHTML = hotelData.amenties
+    }
+    else if (selectedMenu == "abouthotel") {
+      document.getElementById("abouthotel").innerHTML = hotelData.about_hotel
+    }
+    else if (selectedMenu == "facilities") {
+      document.getElementById("facilities").innerHTML = hotelData.facilities
+    }
+    else if (selectedMenu == "policies") {
+      document.getElementById("policies").innerHTML = hotelData.policies
+    }
+  }, [selectedMenu])
+
+  function onMenuClick(e) {
+    console.log(e)
+  }
 
   if (loading) return <div style={{ height: "50vh", padding: '5%' }}><Skeleton active /></div>
   return (
@@ -77,25 +148,44 @@ export default function Hotel() {
                   gap: 10
                 }}
               >
-                <h1 style={{ fontSize: '150%' }}>{hotelData.title}</h1>
-                <p>{<FaMapMarkerAlt color={style.primaryColor} />} {hotelData.address} <Link style={{ color: style.primaryColor, fontWeight: 'bold' }} href={"#"}>(View Map)</Link> </p>
-
-                <MainImage />
-                <Divider style={{ marginBottom: 0 }} />
-                <HotelMenu />
-                {roomData.map((room) => (
-                  <>
-                    <Rooms roomData={room} />
-                    <Divider />
-                  </>
-                ))
-
-                }
-
-
-                <div >
-                  <Location location={hotelData.location} />
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <h1 style={{ fontSize: '150%' }}>{hotelData.title} </h1>
+                  <p style={{ backgroundColor: 'rgba(0,0,0,.1)', padding: '.3% 1%', borderRadius: 100, marginLeft: '1%' }}>{hotelData.type}</p>
                 </div>
+                <p>
+                  {<FaMapMarkerAlt color={style.primaryColor} />}
+                  {hotelData.address}
+                  <Link style={{ color: style.primaryColor, fontWeight: 'bold' }} href={"#"}>
+                    (View Map)</Link> </p>
+
+                <MainImage extraImage={hotelData.images} receptionImages={hotelData.reception_images} roomImages={roomData} />
+                <Divider style={{ marginBottom: 0 }} />
+                <HotelMenu menuClick={(e) => setSelectedMenu(e)} />
+
+                <div>
+                  {selectedMenu == "amenties" &&
+                    <div id='amenties' />
+                  }
+                  {selectedMenu == "abouthotel" &&
+                    <div id='abouthotel' />
+                  }
+                  {selectedMenu == "rooms" &&
+                    <RoomContent />
+                  }
+                  {selectedMenu == "location" &&
+                  <Location location={hotelData.location} />
+                  }
+                  {selectedMenu == "facilities" &&
+                  <div id='facilities' />
+                  }
+                  {selectedMenu == "policies" &&
+                  <div id='policies' />
+                  }
+                </div>
+
+                {/* <div >
+                  <Location location={hotelData.location} />
+                </div> */}
 
               </div>
             </div>
@@ -103,7 +193,7 @@ export default function Hotel() {
             {/* Right side container */}
             <div style={{ width: '25%', paddingLeft: '1%' }}>
               <div style={{ position: 'sticky', top: '10%', transition: ".5s" }}>
-                <Cart />
+                {cartElement}
               </div>
             </div>
           </div>

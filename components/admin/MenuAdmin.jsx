@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { HomeOutlined, PlusOutlined } from '@ant-design/icons';
-import { FaNewspaper } from 'react-icons/fa'
+import { FaHospital, FaHospitalUser, FaList, FaNewspaper, FaShip } from 'react-icons/fa'
 import { Menu } from 'antd';
 
 import { mobile } from '../variables';
@@ -37,20 +37,20 @@ export default function MenuAdmin({ menuClick }) {
         <Menu.Item key={'homepage'}>
           <p> <HomeOutlined /> Homepage</p>
         </Menu.Item>
-        <Menu.SubMenu title={<p> Hotel</p>}>
+        <Menu.SubMenu title={<p><FaHospital/> Hotel</p>}>
+          <Menu.Item key={'hotellist'}>
+            <p><FaList /> Hotel List</p>
+          </Menu.Item>
           <Menu.Item key={'addhotel'}>
             <p><PlusOutlined /> Add Hotels</p>
           </Menu.Item>
-          <Menu.Item key={'hotellist'}>
-            <p><PlusOutlined /> Hotel List</p>
-          </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu title={<p> Cruizes</p>}>
+        <Menu.SubMenu title={<p> <FaShip/> Cruizes</p>}>
+          <Menu.Item key={'cruiseslist'}>
+            <p><FaList /> Cruises List</p>
+          </Menu.Item>
           <Menu.Item key={'addcruises'}>
             <p><PlusOutlined /> Add Cruises</p>
-          </Menu.Item>
-          <Menu.Item key={'cruiseslist'}>
-            <p><PlusOutlined /> Cruises List</p>
           </Menu.Item>
         </Menu.SubMenu>
         <Menu.SubMenu title={<p><FaNewspaper /> Pages</p>}>

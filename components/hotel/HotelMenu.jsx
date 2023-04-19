@@ -1,32 +1,34 @@
 import { Menu } from 'antd'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function HotelMenu() {
+export default function HotelMenu({menuClick}) {
+    const [active, setActive] = useState('rooms')
     return (
         <Menu
             mode='horizontal'
             style={{position:'sticky', top:'9%', zIndex:5, fontSize:17}}
-
+            onClick={(e) => {menuClick(e.key);setActive(e.key)}}
+            activeKey={active}
         >
             <Menu.Item key={'rooms'}>
-                <Link href={'/'}>Rooms</Link>
+                Rooms
             </Menu.Item>
             <Menu.Item key={'amenties'}>
-                <Link href={'#'}>Amenties</Link>
+            Amenties
             </Menu.Item>
             <Menu.Item key={'abouthotel'}>
-                <Link href={'#'}>About</Link>
+            About
             </Menu.Item>
             <Menu.Item key={'location'}>
-                <Link href={'#'}>Location</Link>
+            Location
             </Menu.Item>
             <Menu.Item key={'facilities'}>
-                <Link href={'#'}>Facilities</Link>
+            Facilities
             </Menu.Item>
 
             <Menu.Item key={'policies'}>
-                <Link href={'/about-us'}>Policies</Link>
+            Policies
             </Menu.Item>
 
         </Menu>

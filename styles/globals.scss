@@ -34,7 +34,32 @@ body {
   p{
     font-size: 16px;
   }
-  
+  input{
+    width: 100%;
+    padding: 1.5%;
+    font-size: 16px;
+    border: solid 1px  #d9d9d9;
+  }
+  input:hover{
+    border: solid 1px  #fc4131;
+    outline-style: none;
+    box-shadow: none;
+  }
+  input:focus{
+    outline-style: none;
+    box-shadow: none;
+    border: solid 1px  #fc4131;
+  }
+
+  ::placeholder {
+    color: #d9d9d9;
+  }
+  ul{
+    padding-left: 5%;
+  }
+  li{
+    font-size: 16px;
+  }
 }
 
 .footerdiv{

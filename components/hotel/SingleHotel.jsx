@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { mobile, images } from '../variables';
 import ImageGallery from 'react-image-gallery';
-import { StarFilled, StarOutlined } from '@ant-design/icons';
 import style from '@/styles/component.module.scss';
 import { Button, Rate } from 'antd';
 import Link from 'next/link';
@@ -71,10 +70,10 @@ export default function SingleHotel({ hotelData }) {
                     <h1>{hotel.title}</h1>
                     <p>1 Night - 1 Adult</p>
                     <Rate style={{fontSize:14}} disabled allowHalf defaultValue={hotel.star} />
-                    <p>{hotel.about_hotel.slice(0, 190)}...(<Link target='blank' style={{color:style.primaryColor}} href={"/hotel/" + hotelData.id + "/" + hotel.slug}>more</Link>)</p>
+                    <p>{hotel.about_hotel.slice(0, 190)}...(<Link target='blank' style={{color:style.primaryColor}} href={"/" + hotel.slug}>more</Link>)</p>
                     <h1><span style={{ fontSize: 16, textDecoration: 'line-through', marginRight: 5 }}>₹{hotel.primary_price_offer}</span>₹{hotel.primary_price}/<span style={{ fontSize: 16 }}>per night</span></h1>
                     <div>
-                        <Button type='primary' size='large' onClick={() => window.open("/hotel/" + hotelData.id + "/" + hotel.slug, "_blank")} >Book Hotel</Button>
+                        <Button type='primary' size='large' onClick={() => window.open("/" + hotel.slug, "_blank")} >Book Hotel</Button>
                     </div>
                 </div>
             </div>

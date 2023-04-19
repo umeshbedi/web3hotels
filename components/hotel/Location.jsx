@@ -18,7 +18,7 @@ export default function Location({location}) {
     <GoogleMap
     zoom={15}
     center={{lat:Number(latLong[0]), lng:Number(latLong[1])}}
-    mapContainerStyle={{width:'100%', height:300}}
+    mapContainerStyle={{width:'100%', height:500}}
     
     >
 

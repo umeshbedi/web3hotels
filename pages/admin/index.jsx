@@ -8,12 +8,12 @@ import dynamic from 'next/dynamic';
 
 import MenuAdmin from '@/components/admin/MenuAdmin';
 
-const PageUpdate = dynamic(() => import('../components/admin/PageUpdate'), { ssr: false, loading: () => <Skeleton /> })
-const Dashboard = dynamic(() => import('../components/admin/Dashboard'), { ssr: false, loading: () => <Skeleton /> })
-const Hompage = dynamic(() => import('../components/admin/Hompage'), { ssr: false, loading: () => <Skeleton /> })
-const AdminLogin = dynamic(() => import('../components/admin/AdminLogin'), { ssr: false, loading: () => <Skeleton /> })
-const AddHotel = dynamic(() => import('../components/admin/AddHotel'), { ssr: false, loading: () => <Skeleton /> })
-const HotelList = dynamic(() => import('../components/admin/HotelList'), { ssr: false, loading: () => <Skeleton /> })
+const PageUpdate = dynamic(() => import('../../components/admin/PageUpdate'), { ssr: false, loading: () => <Skeleton /> })
+const Dashboard = dynamic(() => import('../../components/admin/Dashboard'), { ssr: false, loading: () => <Skeleton /> })
+const Hompage = dynamic(() => import('../../components/admin/Hompage'), { ssr: false, loading: () => <Skeleton /> })
+const AdminLogin = dynamic(() => import('../../components/admin/AdminLogin'), { ssr: false, loading: () => <Skeleton /> })
+const AddHotel = dynamic(() => import('../../components/admin/AddHotel'), { ssr: false, loading: () => <Skeleton /> })
+const HotelList = dynamic(() => import('../../components/admin/HotelList'), { ssr: false, loading: () => <Skeleton /> })
 
 
 export default function Admin() {

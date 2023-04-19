@@ -1,5 +1,6 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
+
 export const cityName = [
     "Port Blair",
     "Havelock Island",
@@ -16,6 +17,8 @@ export const category = [
     "Premium",
     "Luxury"
 ]
+
+
 
 export function mobile() {
     if (typeof window !== "undefined") {

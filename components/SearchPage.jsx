@@ -23,7 +23,7 @@ export default function SearchPage({ query }) {
         console.log(query)
         setHotelData([])
         if(Object.keys(query).length!==0){
-            hotels.where("city", "==", query.location).where("category", "==", query.category).get()
+            hotels.where("city", "==", query.location).where("category", "==", query.category).where("status", "==", "Published").get()
                 .then(snap => {
                     if (snap.size != 0) {
                         const hotelTemp = []

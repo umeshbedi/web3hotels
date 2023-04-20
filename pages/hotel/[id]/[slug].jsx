@@ -60,9 +60,6 @@ export default function Hotel() {
   }, [query])
 
 
-  function deleteCart(name) {
-
-  }
 
   function RoomContent() {
     return (
@@ -81,7 +78,6 @@ export default function Hotel() {
               setTimeout(() => {
                 setCartElement(
                   <Cart
-                    deleteCart={(e) => deleteCart(e)}
                     cartData={{
                       hotelName: hotelData.title,
                       hotelId: query.id,

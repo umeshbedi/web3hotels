@@ -111,7 +111,7 @@ const AddRoom = forwardRef(({ hotelId, roomData, UpButton, Index }, ref)=> {
                 </h3>
                 <Space>
                     <p style={{ marginBottom: 5 }}>Order No.:</p>
-                    <Input type='number' defaultValue={orderNo} size='large' onChange={(e)=>setOrderNo(e.target.value)}/>
+                    <Input type='number' defaultValue={orderNo} size='large' onChange={(e)=>setOrderNo(e.target.valueAsNumber)}/>
                 </Space>
                 <div>
                     <p style={{ marginBottom: 5 }}>Room Type Name:</p>
@@ -120,55 +120,55 @@ const AddRoom = forwardRef(({ hotelId, roomData, UpButton, Index }, ref)=> {
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with No Meal (Actual Price):</p>
                     <Space>
-                        <Input defaultValue={noMealSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setNoMealSingle(e.target.value)}/>
-                        <Input defaultValue={noMealDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setNoMealDouble(e.target.value)}/>
-                        <Input defaultValue={noMealThird} placeholder='Third' type='number' size='large' onChange={(e)=>setNoMealThird(e.target.value)}/>
-                        <Input defaultValue={noMealChild} placeholder='Child' type='number' size='large' onChange={(e)=>setNoMealChild(e.target.value)}/>
+                        <Input defaultValue={noMealSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setNoMealSingle(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setNoMealDouble(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealThird} placeholder='Third' type='number' size='large' onChange={(e)=>setNoMealThird(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealChild} placeholder='Child' type='number' size='large' onChange={(e)=>setNoMealChild(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with No Meal (Strike/Offer Price):</p>
                     <Space>
-                        <Input defaultValue={noMealSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setNoMealSingleOffer(e.target.value)}/>
-                        <Input defaultValue={noMealDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setNoMealDoubleOffer(e.target.value)}/>
-                        <Input defaultValue={noMealThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setNoMealThirdOffer(e.target.value)}/>
-                        <Input defaultValue={noMealChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setNoMealChildOffer(e.target.value)}/>
+                        <Input defaultValue={noMealSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setNoMealSingleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setNoMealDoubleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setNoMealThirdOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={noMealChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setNoMealChildOffer(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with Breakfast (Actual Price):</p>
                     <Space>
-                        <Input defaultValue={withBreakFastSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setWithBreakfastSingle(e.target.value)}/>
-                        <Input defaultValue={withBreakFastDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setWithBreakfastDouble(e.target.value)}/>
-                        <Input defaultValue={withBreakFastThird} placeholder='Third' type='number' size='large' onChange={(e)=>setWithBreakfastThird(e.target.value)}/>
-                        <Input defaultValue={withBreakFastChild} placeholder='Child' type='number' size='large' onChange={(e)=>setWithBreakfastChild(e.target.value)}/>
+                        <Input defaultValue={withBreakFastSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setWithBreakfastSingle(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setWithBreakfastDouble(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastThird} placeholder='Third' type='number' size='large' onChange={(e)=>setWithBreakfastThird(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastChild} placeholder='Child' type='number' size='large' onChange={(e)=>setWithBreakfastChild(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with Breakfast (Strike/Offer Price):</p>
                     <Space>
-                        <Input defaultValue={withBreakFastSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setWithBreakfastSingleOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakFastDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setWithBreakfastDoubleOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakFastThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setWithBreakfastThirdOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakFastChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setWithBreakfastChildOffer(e.target.value)}/>
+                        <Input defaultValue={withBreakFastSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setWithBreakfastSingleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setWithBreakfastDoubleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setWithBreakfastThirdOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakFastChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setWithBreakfastChildOffer(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with Breakfast and Dinner (Actual Price):</p>
                     <Space>
-                        <Input defaultValue={withBreakfastDinnerSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerSingle(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerDouble(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerThird} placeholder='Third' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerThird(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerChild} placeholder='Child' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerChild(e.target.value)}/>
+                        <Input defaultValue={withBreakfastDinnerSingle} placeholder='Single' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerSingle(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerDouble} placeholder='Double' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerDouble(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerThird} placeholder='Third' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerThird(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerChild} placeholder='Child' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerChild(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>
                     <p style={{ marginBottom: 5 }}>Price with Breakfast and Dinner (Strike/Offer Price):</p>
                     <Space>
-                        <Input defaultValue={withBreakfastDinnerSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerSingleOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerDoubleOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerThirdOffer(e.target.value)}/>
-                        <Input defaultValue={withBreakfastDinnerChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerChildOffer(e.target.value)}/>
+                        <Input defaultValue={withBreakfastDinnerSingleOffer} placeholder='Single' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerSingleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerDoubleOffer} placeholder='Double' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerDoubleOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerThirdOffer} placeholder='Third' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerThirdOffer(e.target.valueAsNumber)}/>
+                        <Input defaultValue={withBreakfastDinnerChildOffer} placeholder='Child' type='number' size='large' onChange={(e)=>setwithBreakfastDinnerChildOffer(e.target.valueAsNumber)}/>
                     </Space>
                 </div>
                 <div>

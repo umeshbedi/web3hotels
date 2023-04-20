@@ -159,6 +159,8 @@ export default function Rooms({ roomData, cart }) {
         }
     }
 
+    console.log(roomNumber)
+
     useEffect(() => {
         if (selection == "withBreakfast") {
             if ((adult / roomNumber) == 1) {

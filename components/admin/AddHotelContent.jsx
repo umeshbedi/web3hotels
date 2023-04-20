@@ -96,33 +96,44 @@ export default function AddHotelContent({ id }) {
             setComponentLoading(false)
         })
     }, [])
-
+// console.log(slug)
     function updateHotel(i) {
-        setLoading(true)
-        hotels.update({
-            title, address: address,
-            category: hotelCategory,
-            city, gstCharge, serviceCharge,
-            location, about_hotel: about,
-            primary_price: primaryPrice,
-            primary_price_offer: primaryPOffer,
-            slug: `/hotel/${id}/${slug}`,
-            status: i == 0 ? "Draft" : "Published",
-            star: rating, type,
-            seo_description: seoDescription,
-            seo_tag: seoTag, amenties, facilities,
-            policies,
-        })
-            .then(() => {
-                setLoading(false);
-                messageApi.success("Updated successfully!")
+        // setLoading(true)
+        if(slug==""||slug==undefined){
+            messageApi.error("url should not be empty. Please enter some url and submit again.")
+        }else{
+            hotels.update({
+                title, 
+                address: address,
+                category: hotelCategory,
+                city, 
+                gstCharge, 
+                serviceCharge,
+                location, 
+                about_hotel: about,
+                primary_price: primaryPrice,
+                primary_price_offer: primaryPOffer,
+                slug: `/hotel/${id}/${slug}`,
+                status: i == 0 ? "Draft" : "Published",
+                star: rating, 
+                type,
+                seo_description: seoDescription,
+                seo_tag: seoTag, 
+                amenties, 
+                facilities,
+                policies,
             })
-            .catch((err) => {
-                setLoading(false);
-                messageApi.error(err.message)
-            })
+                .then(() => {
+                    setLoading(false);
+                    messageApi.success("Updated successfully!")
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    messageApi.error(err.message)
+                })
+        }
     }
-
+//
 
     useEffect(() => {
         if (imageObj != null) {
@@ -247,7 +258,7 @@ export default function AddHotelContent({ id }) {
     }
 
     if (componentLoading) return <div style={{ height: "50vh" }}><Skeleton active /></div>
-    console.log(slug)
+    
     return (
         <div>
             {contextHolder}
@@ -410,16 +421,16 @@ export default function AddHotelContent({ id }) {
                     <div className={style.RightSubContainer}>
                         <p style={{ marginBottom: 5 }}>Price to Show (₹)</p>
                         <Space direction='vertical' style={{ width: '100%' }}>
-                            <Input defaultValue={primaryPrice} placeholder='Actual Price' type='number' size='large' onChange={(e) => setPrimaryPrice(e.target.value)} />
-                            <Input defaultValue={primaryPOffer} placeholder='Strike/Offer Price' type='number' size='large' onChange={(e) => setPrimaryPOffer(e.target.value)} />
+                            <Input defaultValue={primaryPrice} placeholder='Actual Price' type='number' size='large' onChange={(e) => setPrimaryPrice(e.target.valueAsNumber)} />
+                            <Input defaultValue={primaryPOffer} placeholder='Strike/Offer Price' type='number' size='large' onChange={(e) => setPrimaryPOffer(e.target.valueAsNumber)} />
 
                         </Space>
                     </div>
                     <div className={style.RightSubContainer}>
                         <p style={{ marginBottom: 5 }}>Extra Charge</p>
                         <Space direction='vertical' style={{ width: '100%' }}>
-                            <Input defaultValue={serviceCharge} placeholder='Service Charge (₹)' type='number' size='large' onChange={(e) => setServiceCharge(e.target.value)} />
-                            <Input defaultValue={gstCharge} placeholder='GST' type='number' size='large' onChange={(e) => setGstCharge(e.target.value)} />
+                            <Input defaultValue={serviceCharge} placeholder='Service Charge (₹)' type='number' size='large' onChange={(e) => {setServiceCharge(e.target.valueAsNumber)}} />
+                            <Input defaultValue={gstCharge} placeholder='GST' type='number' size='large' onChange={(e) => setGstCharge(e.target.valueAsNumber)} />
 
                         </Space>
                     </div>

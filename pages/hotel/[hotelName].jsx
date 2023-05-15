@@ -6,7 +6,7 @@ import style from '@/styles/component.module.scss'
 import { Button, Divider, Menu, Select, Skeleton, TreeSelect, message } from 'antd'
 import dynamic from 'next/dynamic'
 import Cart from '@/components/hotel/Cart'
-import { useRouter } from 'next/router'
+
 import { db } from '@/firebase'
 
 const MainImage = dynamic(() => import('@/components/hotel/MainImage'), {
@@ -27,38 +27,19 @@ const Location = dynamic(() => import('@/components/hotel/Location'), {
 });
 
 
-export default function Hotel() {
-  const { query } = useRouter()
+export default function Hotel({ hotelData, roomData }) {
+
+  // console.log(hotelData)
+
   const [loading, setLoading] = useState(true)
-  const [hotelData, setHotelData] = useState({})
-  const [roomData, setRoomData] = useState([])
+  // const [hotelData, setHotelData] = useState({})
+  // const [roomData, setRoomData] = useState([])
   const [msg, shoMsg] = message.useMessage()
 
   const [cartItem, setCartItem] = useState([])
   const [cartElement, setCartElement] = useState(<Cart />)
   const [selectedMenu, setSelectedMenu] = useState('rooms')
   const [menuContent, setMenuContent] = useState("")
-
-  useEffect(() => {
-    // console.log(query)
-    if (query.id != undefined) {
-      const hotels = db.doc(`hotels/${query.id}`)
-      hotels.get().then((snap) => {
-        setHotelData(snap.data())
-      }).catch((err) => msg.error(err.message))
-
-      hotels.collection('rooms').get()
-        .then((snap) => {
-          const roomTemp = []
-          snap.forEach((room) => {
-            roomTemp.push(room.data())
-          })
-          setRoomData(roomTemp);
-          setLoading(false)
-        })
-    }
-  }, [query])
-
 
 
   function RoomContent() {
@@ -80,7 +61,7 @@ export default function Hotel() {
                   <Cart
                     cartData={{
                       hotelName: hotelData.title,
-                      hotelId: query.id,
+                      hotelId: hotelData.id,
                       hotelAddress: hotelData.address,
                       rooms: cartItem,
                       serviceCharge: hotelData.serviceCharge,
@@ -98,10 +79,8 @@ export default function Hotel() {
     )
   }
 
-  function MenuDiv() {
-    return <div id='menuContent' />
-  }
 
+  
   useEffect(() => {
     if (selectedMenu == "amenties") {
       document.getElementById("amenties").innerHTML = hotelData.amenties
@@ -116,12 +95,10 @@ export default function Hotel() {
       document.getElementById("policies").innerHTML = hotelData.policies
     }
   }, [selectedMenu])
+  
+  if (hotelData==undefined && roomData==undefined) return <div style={{ height: "50vh", padding: '5%' }}><Skeleton active /></div>
+  
 
-  function onMenuClick(e) {
-    console.log(e)
-  }
-
-  if (loading) return <div style={{ height: "50vh", padding: '5%' }}><Skeleton active /></div>
   return (
     <main>
       <Head>
@@ -169,20 +146,17 @@ export default function Hotel() {
                     <RoomContent />
                   }
                   {selectedMenu == "location" &&
-                  <Location location={hotelData.location} />
+                    <Location location={hotelData.location} />
                   }
                   {selectedMenu == "facilities" &&
-                  <div id='facilities' />
+                    <div id='facilities' />
                   }
                   {selectedMenu == "policies" &&
-                  <div id='policies' />
+                    <div id='policies' />
                   }
                 </div>
 
-                {/* <div >
-                  <Location location={hotelData.location} />
-                </div> */}
-
+                
               </div>
             </div>
 
@@ -197,4 +171,50 @@ export default function Hotel() {
       </div>
     </main>
   )
+}
+
+
+export const getStaticPaths = async () => {
+  const entries = await db.collection("hotels").get()
+  const paths = entries.docs.map(entry => ({
+    params: {
+      hotelName: entry.data().slug
+    }
+  }));
+  return {
+    paths,
+    fallback: true
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const { hotelName } = context.params;
+  // console.log(packageGroupName)
+  const res = await db.collection("hotels")
+    .where("status", "==", "Published")
+    .where("slug", "==", `/hotel/${hotelName}`).get()
+  const hotelData = res.docs.map((entry) => {
+    return ({ id: entry.id, ...entry.data() })
+  });
+  
+  const {createdAt, ...otherData} = hotelData[0]
+  
+
+  if (hotelData.length == 0) {
+    return {
+      notFound: true
+    };
+  }
+  const getRoomData = await db.doc(`hotels/${hotelData[0].id}`).collection("rooms").get()
+  const roomData = getRoomData.docs.map((d) => (d.data()))
+
+  return {
+    props: {
+      hotelData: otherData,
+      roomData
+    },
+    revalidate: 60,
+
+  }
+
 }

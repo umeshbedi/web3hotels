@@ -83,7 +83,7 @@ export default function AddHotelContent({ id }) {
             setLocation(data.location)
             setPrimaryPrice(data.primary_price)
             setPrimaryPOffer(data.primary_price_offer)
-            setSlug(data.slug.split("/")[3])
+            setSlug(data.slug.split("/")[2])
             setStatus(data.status)
             setRating(data.star)
             setType(data.type)
@@ -113,7 +113,7 @@ export default function AddHotelContent({ id }) {
                 about_hotel: about,
                 primary_price: primaryPrice,
                 primary_price_offer: primaryPOffer,
-                slug: `/hotel/${id}/${slug}`,
+                slug: `/hotel/${slug}`,
                 status: i == 0 ? "Draft" : "Published",
                 star: rating, 
                 type,
@@ -277,7 +277,7 @@ export default function AddHotelContent({ id }) {
 
                     <div>
                         <Space style={{ width: '100%' }}>
-                            <p style={{ marginBottom: 5 }}>Url: https://web3hotels.com/hotel/{id}/</p>
+                            <p style={{ marginBottom: 5 }}>Url: https://web3hotels.com/hotel/</p>
                             <input ref={slugRef} defaultValue={slug} placeholder='change url' onBlur={(e) => {
                                 const value = e.target.value.split(" ").join("-")
                                 setSlug(value)

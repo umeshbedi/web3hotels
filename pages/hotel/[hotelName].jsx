@@ -8,6 +8,11 @@ import dynamic from 'next/dynamic'
 import Cart from '@/components/hotel/Cart'
 
 import { db } from '@/firebase'
+import SHeader from '@/components/skeleton/SHeader'
+import SHome from '@/components/skeleton/SHome'
+import Header from '@/components/Header'
+import String2Html from '@/components/String2Html'
+import { mobile } from '@/components/variables'
 
 const MainImage = dynamic(() => import('@/components/hotel/MainImage'), {
   ssr: false,
@@ -27,7 +32,7 @@ const Location = dynamic(() => import('@/components/hotel/Location'), {
 });
 
 
-export default function Hotel({ hotelData, roomData }) {
+export default function Hotel({ hotelData, roomData, cruizeData, activityData }) {
 
   // console.log(hotelData)
 
@@ -40,6 +45,22 @@ export default function Hotel({ hotelData, roomData }) {
   const [cartElement, setCartElement] = useState(<Cart />)
   const [selectedMenu, setSelectedMenu] = useState('rooms')
   const [menuContent, setMenuContent] = useState("")
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(mobile())
+  }, [isMobile])
+
+
+  if (hotelData == undefined) {
+    return (
+      <>
+        <SHeader />
+        <SHome />
+      </>
+    )
+  }
 
 
   function RoomContent() {
@@ -80,24 +101,8 @@ export default function Hotel({ hotelData, roomData }) {
   }
 
 
-  
-  useEffect(() => {
-    if (selectedMenu == "amenties") {
-      document.getElementById("amenties").innerHTML = hotelData.amenties
-    }
-    else if (selectedMenu == "abouthotel") {
-      document.getElementById("abouthotel").innerHTML = hotelData.about_hotel
-    }
-    else if (selectedMenu == "facilities") {
-      document.getElementById("facilities").innerHTML = hotelData.facilities
-    }
-    else if (selectedMenu == "policies") {
-      document.getElementById("policies").innerHTML = hotelData.policies
-    }
-  }, [selectedMenu])
-  
-  if (hotelData==undefined && roomData==undefined) return <div style={{ height: "50vh", padding: '5%' }}><Skeleton active /></div>
-  
+
+
 
   return (
     <main>
@@ -105,11 +110,12 @@ export default function Hotel({ hotelData, roomData }) {
         <title>{hotelData.title}</title>
         <meta name="description" content={hotelData.seo_description} />
       </Head>
+      <Header activityData={activityData} cruizeData={cruizeData} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {shoMsg}
         <div style={{ width: '90%', paddingTop: '3%' }}>
-          <div style={{ width: '100%', display: 'flex' }}>
-            <div style={{ width: '75%' }}>
+          <div style={{ width: '100%', display: isMobile ? "block" : 'flex' }}>
+            <div style={{ width: isMobile ? '100%' : '75%' }}>
               <div
                 style={{
                   backgroundColor: 'white',
@@ -136,33 +142,40 @@ export default function Hotel({ hotelData, roomData }) {
                 <HotelMenu menuClick={(e) => setSelectedMenu(e)} />
 
                 <div>
-                  {selectedMenu == "amenties" &&
-                    <div id='amenties' />
-                  }
-                  {selectedMenu == "abouthotel" &&
-                    <div id='abouthotel' />
-                  }
+
                   {selectedMenu == "rooms" &&
                     <RoomContent />
                   }
+
                   {selectedMenu == "location" &&
                     <Location location={hotelData.location} />
                   }
-                  {selectedMenu == "facilities" &&
-                    <div id='facilities' />
-                  }
-                  {selectedMenu == "policies" &&
-                    <div id='policies' />
-                  }
+                  <div style={{padding:10}}>
+
+                    {selectedMenu == "amenties" &&
+                      <String2Html id={"amenties"} string={hotelData.amenties} />
+                    }
+                    {selectedMenu == "abouthotel" &&
+                      <String2Html id={"aboutHotel"} string={hotelData.about_hotel} />
+                    }
+
+                    {selectedMenu == "facilities" &&
+                      <String2Html id={"facilites"} string={hotelData.facilities} />
+
+                    }
+                    {selectedMenu == "policies" &&
+                      <String2Html id={"policies"} string={hotelData.policies} />
+                    }
+                  </div>
                 </div>
 
-                
+
               </div>
             </div>
 
             {/* Right side container */}
-            <div style={{ width: '25%', paddingLeft: '1%' }}>
-              <div style={{ position: 'sticky', top: '10%', transition: ".5s" }}>
+            <div id='cartItem' style={{ width: isMobile ? "100%" : '25%', paddingLeft: '1%' }}>
+              <div style={{ position: 'sticky', top: '10%', transition: ".5s", marginTop: isMobile ? 20 : 0 }}>
                 {cartElement}
               </div>
             </div>
@@ -189,29 +202,50 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { hotelName } = context.params;
-  // console.log(packageGroupName)
+
+  // console.log(hotelName)
+
   const res = await db.collection("hotels")
     .where("status", "==", "Published")
     .where("slug", "==", `/hotel/${hotelName}`).get()
-  const hotelData = res.docs.map((entry) => {
+  
+    const hotelData = res.docs.map((entry) => {
     return ({ id: entry.id, ...entry.data() })
   });
-  
-  const {createdAt, ...otherData} = hotelData[0]
-  
 
   if (hotelData.length == 0) {
     return {
       notFound: true
     };
   }
+
+  const { createdAt, ...otherData } = hotelData[0]
+
+
+  
   const getRoomData = await db.doc(`hotels/${hotelData[0].id}`).collection("rooms").get()
   const roomData = getRoomData.docs.map((d) => (d.data()))
+
+
+  //Getting Cruize Data
+  const cruize = await db.collection("ferry").get()
+  const cruizeData = cruize.docs.map((item, i) => {
+    const data = item.data()
+    return { name: data.name, slug: data.slug, image: data.image }
+  })
+
+  //Getting Activity Data
+
+  const activity = await db.collection("activity").get()
+  const activityData = activity.docs.map((item, i) => {
+    const data = item.data()
+    return { name: data.name, slug: data.slug, thumbnail: data.thumbnail }
+  })
 
   return {
     props: {
       hotelData: otherData,
-      roomData
+      roomData, cruizeData, activityData
     },
     revalidate: 60,
 

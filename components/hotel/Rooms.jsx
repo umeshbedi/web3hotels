@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ImageGallery from 'react-image-gallery'
-import { MinusPlus, images } from '../variables'
+import { MinusPlus, images, mobile } from '../variables'
 import { Button, Divider, Modal, Select, message } from 'antd'
 import style from '@/styles/component.module.scss'
 import { CheckOutlined, RightOutlined } from '@ant-design/icons'
@@ -25,6 +25,14 @@ export default function Rooms({ roomData, cart }) {
         { value: 'withBreakfastDinner', label: 'With BreakFast & Dinner' },
         { value: 'noMeal', label: 'No Meal' },
     ]
+
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        setIsMobile(mobile())
+    }, [isMobile])
+
+
 
     function priceWithBreakFast(e) {
         if (e == 1) {
@@ -207,15 +215,19 @@ export default function Rooms({ roomData, cart }) {
         }
         cart(tempCart)
 
+        const a = document.createElement("a")
+        a.href = "#cartItem"
+        a.click()
+
     }
 
     return (
         <div>
             {showMsg}
-            <div style={{ display: 'flex', gap: '5%' }}>
-                <div style={{ width: '40%' }}>
-                    <h1 style={{ marginBottom: '3%' }}>{roomData.name}</h1>
-                    <div style={{cursor:'pointer'}}>
+            <div style={{ display: "flex", gap: isMobile ? 30 : '5%', flexDirection: isMobile ? "column" : "row" }}>
+                <div style={{ width: isMobile ? "100%" : '40%' }}>
+                    <h1 style={{ marginBottom: '3%', paddingLeft: isMobile ? 10 : 0 }}>{roomData.name}</h1>
+                    <div style={{ cursor: 'pointer' }}>
                         <ImageGallery
                             ref={fullRef}
                             items={roomData.images.map((img) => {
@@ -235,7 +247,8 @@ export default function Rooms({ roomData, cart }) {
                     </div>
 
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6%' }}>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 17, width: isMobile ? "80%" : "auto", paddingLeft: isMobile ? 10 : 0 }}>
                     <p><b> Guest and Room Option</b></p>
 
                     <Select
@@ -338,7 +351,7 @@ export default function Rooms({ roomData, cart }) {
                     />
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingLeft: isMobile ? 10 : 0 }}>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                         <p> <b> Available</b></p>
@@ -355,7 +368,10 @@ export default function Rooms({ roomData, cart }) {
                         </div>
                         <p style={{ color: style.primaryColor }}><b>You Saved ₹{priceOffer - price}</b></p>
                         <br />
-                        <Button type='primary' size='large' onClick={addtoCart}>
+                        <Button type='primary' size='large' onClick={() => {
+                            addtoCart();
+
+                        }}>
                             Select Room
                         </Button>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { message, Layout, Skeleton, Dropdown } from 'antd';
+import { message, Layout, Skeleton, Dropdown, Modal } from 'antd';
 const { Header, Sider } = Layout
 import { UserOutlined, LogoutOutlined, MailOutlined } from '@ant-design/icons'
 import { auth, db } from '@/firebase';
@@ -7,6 +7,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
 import MenuAdmin from '@/components/admin/MenuAdmin';
+import Media from '@/components/admin/Media';
 
 const PageUpdate = dynamic(() => import('../../components/admin/PageUpdate'), { ssr: false, loading: () => <Skeleton /> })
 const Dashboard = dynamic(() => import('../../components/admin/Dashboard'), { ssr: false, loading: () => <Skeleton /> })
@@ -14,7 +15,8 @@ const Hompage = dynamic(() => import('../../components/admin/Hompage'), { ssr: f
 const AdminLogin = dynamic(() => import('../../components/admin/AdminLogin'), { ssr: false, loading: () => <Skeleton /> })
 const AddHotel = dynamic(() => import('../../components/admin/AddHotel'), { ssr: false, loading: () => <Skeleton /> })
 const HotelList = dynamic(() => import('../../components/admin/HotelList'), { ssr: false, loading: () => <Skeleton /> })
-
+const Activity = dynamic(() => import('../../components/admin/Activity'), { ssr: false, loading: () => <Skeleton /> })
+const Ferry = dynamic(() => import('../../components/admin/Ferry'), { ssr: false, loading: () => <Skeleton /> })
 
 export default function Admin() {
 
@@ -26,6 +28,7 @@ export default function Admin() {
   const [user, setUser] = useState([])
   const [content, setContent] = useState(< AddHotel />)
 
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -70,11 +73,17 @@ export default function Admin() {
     else if(e == 'hotellist'){
       setContent(<HotelList />)
     }
+    else if(e == 'activity'){
+      setContent(<Activity />)
+    }
     else if(e == 'addcruises'){
-      alert(e)
+      setContent(<Ferry />)
     }
     else if(e == 'cruiseslist'){
       alert(e)
+    }
+    else if (e == 'media') {
+      setOpen(true)
     }
     else{
       setContent(<PageUpdate pageName={e} />)
@@ -153,6 +162,15 @@ export default function Admin() {
         </Layout>
 
       </Layout>
+    
+      <Modal
+        open={open}
+        onCancel={() => setOpen(false)}
+        footer={[]}
+      >
+        <Media />
+      </Modal>
+
     </main>
   )
 }

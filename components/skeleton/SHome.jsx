@@ -10,6 +10,7 @@ export default function SHome() {
     return (
         <>
             <Skeleton.Button active style={{ height: 500, width: '100%' }} />
+            
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{
                     width: isMobile ? '80%' :'70%',

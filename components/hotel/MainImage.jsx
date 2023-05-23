@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import ImageGallery from 'react-image-gallery'
-import { ImageFooter, images } from '../variables'
+import { ImageFooter, images, mobile } from '../variables'
 
 
 export default function MainImage({extraImage, roomImages, receptionImages}) {
@@ -9,6 +9,13 @@ export default function MainImage({extraImage, roomImages, receptionImages}) {
     const [imageToShow, setImageToShow] = useState([])
     const [allImages, setAllImages] = useState([])
     const [allRoomImages, setAllRoomImages] = useState([])
+
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+      setIsMobile(mobile())
+    }, [isMobile])
+  
     
     useEffect(()=>{
         const allImageTemp=[]
@@ -31,9 +38,10 @@ export default function MainImage({extraImage, roomImages, receptionImages}) {
         setAllRoomImages(allroomImagesTemp)
     },[])
 
+
     return (
-        <div style={{ display: 'flex' }}>
-            <div style={{ width: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', flexDirection:isMobile?"column":"row", gap:20 }}>
+            <div style={{ width: isMobile?"100%":'80%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <ImageGallery items={imageToShow.map((img)=>{
                     return({
                         original:img,
@@ -59,10 +67,11 @@ export default function MainImage({extraImage, roomImages, receptionImages}) {
                     onPress={() => allFullRef.current.fullScreen()}
                 />
             </div>
-            <div style={{ width: '40%', marginLeft: '2%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            
+            <div style={{ width: isMobile?"100%":'40%', marginLeft: isMobile?0:'2%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap:20}}>
                 <div
                     style={{
-                        height: '48%',
+                        height: isMobile?200:'48%',
                         background: `url('${roomImages[0].images[0]}')`,
                         backgroundSize: 'cover',
                         display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'
@@ -79,7 +88,7 @@ export default function MainImage({extraImage, roomImages, receptionImages}) {
 
                 <div
                     style={{
-                        height: '48%',
+                        height: isMobile?200:'48%',
                         background: `url('${receptionImages[0]}')`,
                         backgroundSize: 'cover',
                         display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'

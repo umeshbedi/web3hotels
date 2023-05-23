@@ -11,6 +11,7 @@ import AddRoom from './AddRoom';
 import firebase from 'firebase/compat/app';
 import { FaShare } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const borderStyle = 'solid .5px #d9d9d9'
 const uploadgrid = { height: 80, width: 80, border: borderStyle, borderRadius: 10 }
@@ -277,14 +278,16 @@ export default function AddHotelContent({ id }) {
 
                     <div>
                         <Space style={{ width: '100%' }}>
-                            <p style={{ marginBottom: 5 }}>Url: https://web3hotels.com/hotel/</p>
+                            <p style={{ marginBottom: 5 }}>Url: {window.location.hostname}/hotel/</p>
                             <input ref={slugRef} defaultValue={slug} placeholder='change url' onBlur={(e) => {
                                 const value = e.target.value.split(" ").join("-")
                                 setSlug(value)
                                 slugRef.current.value = value.split(" ").join("-")
                             }}
                             />
-                            <FaShare style={{ color: 'orange', cursor: 'pointer' }} onClick={() => window.open(`https://web3hotels.com/hotel/${id}/${slug}`, "_blank")} />
+                            <a target='blank' href={"/hotel/"+slug}>
+                            <FaShare style={{ color: 'orange', cursor: 'pointer' }} />
+                            </a>
                         </Space>
                     </div>
 

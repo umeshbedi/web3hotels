@@ -20,10 +20,14 @@ export default function SearchPage({ query }) {
     }, [isMobile])
 
     useEffect(() => {
-        console.log(query)
+        console.log(query.location)
         setHotelData([])
         if(Object.keys(query).length!==0){
-            hotels.where("city", "==", query.location).where("category", "==", query.category).where("status", "==", "Published").get()
+            hotels
+            .where("city", query.location=="Andaman and Nicobar Islands"?"!=":"==", query.location)
+            .where("category", "==", query.category)
+            .where("status", "==", "Published")
+            .get()
                 .then(snap => {
                     if (snap.size != 0) {
                         const hotelTemp = []

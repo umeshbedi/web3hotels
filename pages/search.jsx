@@ -5,8 +5,11 @@ import { mobile } from '@/components/variables'
 import { Row, Col } from 'antd'
 import SearchDiv from '@/components/SearchDiv'
 import SearchPage from '@/components/SearchPage'
+import Header from '@/components/Header'
+import { db } from '@/firebase'
 
-export default function Search() {
+
+export default function Search({cruizeData, activityData}) {
 
   const [isMobile, setIsMobile] = useState(false)
   const query = useRouter().query
@@ -21,6 +24,7 @@ export default function Search() {
       <Head>
         <title>search hotels</title>
       </Head>
+      <Header cruizeData={cruizeData} activityData={activityData}/>
       <div>
         <div
           className='homeBanner'
@@ -53,4 +57,31 @@ export default function Search() {
       </div>
     </main>
   )
+}
+
+export const getStaticProps = async (context) => {
+  
+  //Getting Cruize Data
+  const cruize = await db.collection("ferry").get()
+  const cruizeData = cruize.docs.map((item, i) => {
+    const data = item.data()
+    return { name: data.name, slug: data.slug, image: data.image }
+  })
+
+  //Getting Activity Data
+
+  const activity = await db.collection("activity").get()
+  const activityData = activity.docs.map((item, i) => {
+    const data = item.data()
+    return { name: data.name, slug: data.slug, thumbnail: data.thumbnail }
+  })
+
+  return {
+    props: {
+      cruizeData, activityData
+    },
+    revalidate: 60,
+
+  }
+
 }

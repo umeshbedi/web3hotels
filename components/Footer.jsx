@@ -101,8 +101,8 @@ export default function Footer() {
         <Element
           heading={"Contact with Us"}
           items={[
-            { name: <><FaPhoneAlt /> +91 9434261139</>, link: "tel:+919434261139" },
-            { name: <><FaPhoneAlt /> +91 9933267038</>, link: "tel:+919933267038" },
+            { name: <><FaPhoneAlt /> +91 8900984766</>, link: "tel:+918900984766" },
+            { name: <><FaPhoneAlt /> +91 9679556315</>, link: "tel:+919679556315" },
             { name: <><FiMail /> web3hotel@gmail.com</>, link: 'mailto:web3hotel@gmail.com' },
             
           ]}

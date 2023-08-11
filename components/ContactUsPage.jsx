@@ -42,7 +42,7 @@ export default function ContactUsPage() {
                         <FiMapPin style={{fontSize:35}}/>
                         <h2 style={{color:style.primaryColor}}>Address</h2>
                         <p style={{textAlign:'center', lineHeight:'140%'}}>
-                        Sardar Bhagwan Singh Shopping Complex, Dollygunj, Port Blair, Andaman and Nicobar Islands 744103
+                        Deen Street , Thomas Colony , Junglighat, Port Blair , S.Andaman
                             </p>
                         <hr style={{width:'80%'}}/>
                     </div>
@@ -55,7 +55,7 @@ export default function ContactUsPage() {
                     <div style={{display:'flex',color:'white', flexDirection:'column', alignItems:'center', gap:10}}>
                         <FiPhone style={{fontSize:35}}/>
                         <h2 style={{color:style.primaryColor}}>Contact No.</h2>
-                        <p style={{textAlign:'center', lineHeight:'140%'}}>+91 9434261139, +91 9933267038</p>
+                        <p style={{textAlign:'center', lineHeight:'140%'}}>+91 8900984766, +91 9679556315</p>
                         
                     </div>
                 </div>
